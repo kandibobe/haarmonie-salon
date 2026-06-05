@@ -111,6 +111,44 @@ export interface BookingDetails {
   time: string;
 }
 
+export interface StoredBooking extends BookingDetails {
+  createdAt?: string;
+}
+
+/**
+ * Alle gespeicherten Buchungen (für die Admin-Übersicht), sortiert nach
+ * Datum + Uhrzeit. Ohne Redis: leeres Array.
+ */
+export async function getAllBookings(): Promise<StoredBooking[]> {
+  if (!redis) return [];
+  try {
+    const keys: string[] = [];
+    let cursor = '0';
+    do {
+      const [next, batch] = await redis.scan(cursor, { match: 'booking:*', count: 200 });
+      cursor = next;
+      keys.push(...batch);
+    } while (cursor !== '0');
+
+    if (keys.length === 0) return [];
+
+    const values = await Promise.all(keys.map((k) => redis!.get(k)));
+    const bookings = values
+      .map((v) => {
+        if (!v) return null;
+        // Upstash kann JSON automatisch deserialisieren — beide Fälle abdecken.
+        return typeof v === 'string' ? (JSON.parse(v) as StoredBooking) : (v as StoredBooking);
+      })
+      .filter((b): b is StoredBooking => b !== null);
+
+    return bookings.sort((a, b) =>
+      `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`)
+    );
+  } catch {
+    return [];
+  }
+}
+
 /**
  * Reserviert einen Slot atomar-genug für eine Demo: prüft Belegung und
  * fügt hinzu. Gibt false zurück, wenn der Slot bereits vergeben ist.
