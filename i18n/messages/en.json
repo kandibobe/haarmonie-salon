@@ -108,6 +108,7 @@
     "submit": "Book appointment",
     "submitting": "Booking...",
     "slotTaken": "Sorry, this slot was just taken. Please choose another time.",
+    "rateLimited": "Too many requests. Please try again in a few minutes.",
     "error": "Something went wrong. Please try again.",
     "successToast": "Appointment booked successfully!",
     "successTitle": "Appointment confirmed!",

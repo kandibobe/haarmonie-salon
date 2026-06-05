@@ -1,4 +1,4 @@
-import { Redis } from '@upstash/redis';
+import { redis } from './redis';
 import { salonConfig } from './config';
 
 /**
@@ -12,14 +12,6 @@ import { salonConfig } from './config';
  *
  * Wiederverwendbar: in einem anderen Projekt nur lib/config.ts anpassen.
  */
-
-const redis =
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-    ? new Redis({
-        url: process.env.UPSTASH_REDIS_REST_URL,
-        token: process.env.UPSTASH_REDIS_REST_TOKEN,
-      })
-    : null;
 
 export const isPersistenceEnabled = redis !== null;
 

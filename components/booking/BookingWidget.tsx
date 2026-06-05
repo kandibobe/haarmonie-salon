@@ -31,6 +31,8 @@ const formSchema = z.object({
   email: z.string().email(),
   phone: z.string().min(7),
   consent: z.literal(true),
+  // Honeypot — für Menschen unsichtbar, nur Bots füllen es aus.
+  company: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -121,6 +123,7 @@ export function BookingWidget() {
           date,
           time,
           consent: data.consent,
+          company: data.company ?? '',
         }),
       });
 
@@ -129,6 +132,10 @@ export function BookingWidget() {
         setTime(null);
         setStep(2);
         loadSlots(date);
+        return;
+      }
+      if (res.status === 429) {
+        toast.error(t('rateLimited'));
         return;
       }
       if (!res.ok) throw new Error();
@@ -369,6 +376,15 @@ export function BookingWidget() {
               transition={{ duration: 0.25 }}
               onSubmit={handleSubmit(onSubmit)}
             >
+              {/* Honeypot: visuell + für Screenreader versteckt */}
+              <input
+                {...register('company')}
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute left-[-9999px] h-0 w-0 opacity-0"
+              />
               <button
                 type="button"
                 onClick={() => setStep(2)}

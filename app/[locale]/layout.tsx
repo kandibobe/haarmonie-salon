@@ -10,6 +10,8 @@ import { Footer } from '@components/layout/Footer';
 import { DemoBanner } from '@components/ui/DemoBanner';
 import { FloatingCallButton } from '@components/ui/FloatingCallButton';
 import { ChatWidget } from '@components/chat/ChatWidget';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { routing } from '@/i18n/routing';
 import { salonConfig } from '@lib/config';
 import '../globals.css';
@@ -119,6 +121,8 @@ export default async function LocaleLayout({
           <ChatWidget />
           <Toaster position="bottom-center" richColors />
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

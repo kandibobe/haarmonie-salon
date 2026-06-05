@@ -108,6 +108,7 @@
     "submit": "Termin verbindlich buchen",
     "submitting": "Wird gebucht...",
     "slotTaken": "Dieser Termin wurde leider gerade vergeben. Bitte wählen Sie eine andere Uhrzeit.",
+    "rateLimited": "Zu viele Anfragen. Bitte versuchen Sie es in einigen Minuten erneut.",
     "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     "successToast": "Termin erfolgreich gebucht!",
     "successTitle": "Termin bestätigt!",

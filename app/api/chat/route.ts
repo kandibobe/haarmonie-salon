@@ -1,6 +1,7 @@
 import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 import { salonConfig, services } from '@lib/config';
+import { checkRateLimit, getClientIp } from '@lib/rate-limit';
 
 export const maxDuration = 30;
 
@@ -26,6 +27,15 @@ Wichtig:
 const FALLBACK_RESPONSE = `Hallo und willkommen bei ${salonConfig.name}! Ich bin der KI-Empfang. Ich kann Ihnen Fragen zu Leistungen, Preisen und Öffnungszeiten beantworten. Für einen Termin nutzen Sie bitte die Online-Terminbuchung auf dieser Seite ("Termin buchen").`;
 
 export async function POST(req: Request) {
+  // Rate limit pro IP (begrenzt Gemini-Kosten / Missbrauch).
+  const { success } = await checkRateLimit('chat', getClientIp(req));
+  if (!success) {
+    return new Response('Zu viele Anfragen. Bitte versuchen Sie es in einer Minute erneut.', {
+      status: 429,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  }
+
   const { messages } = await req.json();
 
   // Fallback ohne API-Key: einfacher Text-Stream (Demo läuft trotzdem).

@@ -58,7 +58,40 @@ config-getriebene, portierbare Kernmodul:
 - `app/api/booking/route.ts` — Buchung anlegen (POST)
 - `components/booking/BookingWidget.tsx` — 3-Schritt-Buchungs-UI
 
+## Für einen neuen Kunden anpassen (Rebranding-Checkliste)
+
+Diese Vorlage ist bewusst config-getrieben. Für einen neuen Betrieb (Physio, Restaurant,
+Kosmetik …) in der Regel nur:
+
+1. **`lib/config.ts`** — `salonConfig` (Name, Adresse, Telefon, `whatsappNumber`, Öffnungszeiten,
+   `bookingHours`, `slotMinutes`), `services` (Leistungen, Dauer, Preis), `stats`, `testimonials`,
+   `projects` (Galeriebilder).
+2. **`app/globals.css`** — `@theme`-Farbwerte (die Variablennamen bleiben, nur die Hex-Werte
+   ändern → die ganze Seite wird umgefärbt).
+3. **`i18n/messages/{de,en}.json`** — Texte.
+4. **`app/api/chat/route.ts`** — `SYSTEM_PROMPT` an die neue Branche anpassen.
+5. **Bilder** — Hero/About/Projects-URLs in `config.ts` + `HeroSection`/`AboutSection`.
+6. **Recht** — `impressum`/`datenschutz`, `public/favicon.svg`, `app/[locale]/opengraph-image.tsx`.
+
+## Produktionshärtung (bereits enthalten)
+
+- **Rate-Limiting** (Upstash sliding window) auf `/api/booking` (5/10 min) und `/api/chat`
+  (20/min) — `lib/rate-limit.ts`.
+- **Anti-Spam-Honeypot** im Buchungsformular + Serverprüfung.
+- **Sicherheits-Header** (HSTS, X-Content-Type-Options, Referrer-Policy …) in `next.config.ts`.
+- **Kundenbestätigung per E-Mail** zusätzlich zur Salon-Benachrichtigung (best-effort).
+- **Dynamisches OG-Bild** (`next/og`) für Social-Sharing.
+- **Vercel Analytics + Speed Insights**.
+- **A11y**: sichtbarer Fokus-Ring, `prefers-reduced-motion`, semantische Labels.
+- Alle externen Dienste **degradieren graceful** (Mock/Fallback ohne Keys).
+
 ## Hinweis zu WhatsApp
 
 Es wird bewusst **wa.me** (Click-to-Chat) genutzt — kostenlos und ohne Meta-Verifizierung, wie bei
 realen kleinen Betrieben in DE. Die WhatsApp Business API ist hier nicht nötig.
+
+## Deployment (Vercel)
+
+1. Repo zu GitHub pushen oder `npx vercel` aus dem Ordner.
+2. In den Vercel-Projekt-Einstellungen die Env-Variablen setzen (siehe Tabelle oben).
+3. `npx vercel --prod`.
