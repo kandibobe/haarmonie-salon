@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title": "Haarmonie Gelsenkirchen | Hair Salon with Online Booking",
+    "description": "Hair & beauty salon in Gelsenkirchen. Women's & men's cuts, coloring, highlights, updos. Book your appointment online in seconds."
+  },
+  "nav": {
+    "services": "Services",
+    "about": "About",
+    "projects": "Gallery",
+    "contact": "Contact",
+    "ctaButton": "Book now"
+  },
+  "hero": {
+    "eyebrow": "Hair & Beauty · Gelsenkirchen",
+    "headline": "Your new look — booked online in 60 seconds",
+    "subline": "From a classic cut to a balayage: enjoy relaxed pampering at your salon in the heart of Gelsenkirchen.",
+    "cta": "Book online",
+    "ctaServices": "View services",
+    "badge1": "Online booking",
+    "badge2": "Master salon",
+    "badge3": "Organic cosmetics"
+  },
+  "stats": {
+    "stat1": "Years of experience",
+    "stat2": "Happy customers",
+    "stat3": "Customer rating",
+    "stat4": "Stylists in our team"
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "What we do for you",
+    "subtitle": "From a quick trim to a complete color makeover — all from one place.",
+    "service1Title": "Women's Cut & Blow-dry",
+    "service1Desc": "A cut tailored to you, including consultation, wash and blow-dry.",
+    "service2Title": "Men's Cut",
+    "service2Desc": "Classic or modern — a precise cut with clean contours and finish.",
+    "service3Title": "Coloring",
+    "service3Desc": "Brilliant colors with high-quality, gentle products.",
+    "service4Title": "Highlights & Balayage",
+    "service4Desc": "Natural highlights, foil techniques or soft balayage.",
+    "service5Title": "Updos",
+    "service5Desc": "Beautifully styled for weddings, proms or any special occasion.",
+    "service6Title": "Children's Cut",
+    "service6Desc": "Patient and child-friendly — the first salon visit becomes a treat.",
+    "duration": "approx. {min} min"
+  },
+  "about": {
+    "badge": "About us",
+    "title": "Haarmonie — a salon to feel good in",
+    "description": "Since 2013 we have combined craftsmanship with genuine advice. We take our time, listen, and bring out the best in your style — in a relaxed atmosphere in the heart of Gelsenkirchen.",
+    "feature1Title": "Personal consultation",
+    "feature1Desc": "We take our time and advise you honestly on cut, color and care.",
+    "feature2Title": "Experienced team",
+    "feature2Desc": "Six trained stylists with an eye for detail.",
+    "feature3Title": "Easy online booking",
+    "feature3Desc": "Choose a service, day and time — no phone queue required.",
+    "imageAlt": "Hair salon interior",
+    "badgeExperience": "Salon since 2013",
+    "badgeCert": "Organic cosmetics"
+  },
+  "process": {
+    "badge": "How it works",
+    "title": "Your appointment in 4 steps",
+    "subtitle": "Fast, transparent and from anywhere, anytime.",
+    "step1Title": "Choose a time",
+    "step1Desc": "Pick a service, day and free time slot online — in under a minute.",
+    "step2Title": "Get confirmation",
+    "step2Desc": "You instantly receive a confirmation of your chosen appointment.",
+    "step3Title": "Come in",
+    "step3Desc": "Sit back and relax — our team takes care of your look.",
+    "step4Title": "Shine",
+    "step4Desc": "Leave the salon with a result that's exactly right for you."
+  },
+  "projects": {
+    "badge": "Gallery",
+    "title": "Our work speaks for itself",
+    "subtitle": "A glimpse of cuts, colors and styling from our salon."
+  },
+  "testimonials": {
+    "badge": "Reviews",
+    "title": "What our customers say",
+    "subtitle": "Real experiences — straight from our guests."
+  },
+  "booking": {
+    "badge": "Online Booking",
+    "title": "Book your appointment",
+    "subtitle": "Choose a service, day and time — we look forward to seeing you.",
+    "step1Label": "Step 1 of 3",
+    "step1Title": "Choose a service",
+    "step2Label": "Step 2 of 3",
+    "step2Title": "Choose day & time",
+    "step3Label": "Step 3 of 3",
+    "step3Title": "Your contact details",
+    "back": "Back",
+    "pickDate": "Please select a day first.",
+    "noSlots": "Unfortunately there are no free slots on this day. Please choose another day.",
+    "durationShort": "{min} min",
+    "namePlaceholder": "Full name",
+    "emailPlaceholder": "Email address",
+    "phonePlaceholder": "Phone number",
+    "nameError": "Please enter your name.",
+    "emailError": "Please enter a valid email address.",
+    "phoneError": "Please enter a valid phone number.",
+    "consentBefore": "I have read the",
+    "consentLink": "privacy policy",
+    "consentAfter": "and agree to my data being processed to handle the appointment.",
+    "consentError": "Please agree to the data processing.",
+    "submit": "Book appointment",
+    "submitting": "Booking...",
+    "slotTaken": "Sorry, this slot was just taken. Please choose another time.",
+    "error": "Something went wrong. Please try again.",
+    "successToast": "Appointment booked successfully!",
+    "successTitle": "Appointment confirmed!",
+    "successSubtitle": "We look forward to your visit. A confirmation is on its way.",
+    "summaryService": "Service",
+    "summaryDate": "Date",
+    "summaryTime": "Time",
+    "confirmWhatsApp": "Confirm via WhatsApp",
+    "newBooking": "Book another appointment",
+    "waMessage": "Hi {salon}, I'd like to confirm my appointment: {service} on {date} at {time}. My name: {name}."
+  },
+  "contact": {
+    "badge": "Contact",
+    "title": "Visit us",
+    "subtitle": "Tue–Fri 9am–7pm · Sat 9am–3pm. Closed Sun & Mon.",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Opening hours",
+    "mapTitle": "Location Gelsenkirchen"
+  },
+  "chat": {
+    "title": "AI Reception",
+    "online": "Available now",
+    "placeholder": "Ask about prices, appointments ...",
+    "send": "Send",
+    "welcome": "Hi! 👋 I'm Haarmonie's AI reception. Ask me about services, prices or opening hours — or book an appointment online right away.",
+    "openLabel": "Open chat",
+    "closeLabel": "Close chat",
+    "error": "Sorry, something went wrong. Please try again."
+  },
+  "footer": {
+    "tagline": "Your hair & beauty salon in Gelsenkirchen since 2013.",
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "impressum": "Impressum",
+    "datenschutz": "Privacy policy",
+    "copyright": "© 2025 Haarmonie Gelsenkirchen. All rights reserved.",
+    "madeBy": "Website created by",
+    "madeByLink": "kobiakov.dev"
+  },
+  "lang": {
+    "de": "DE",
+    "en": "EN"
+  }
+}

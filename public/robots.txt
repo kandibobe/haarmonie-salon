@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://friseur-demo.vercel.app/sitemap.xml

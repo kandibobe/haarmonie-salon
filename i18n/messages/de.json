@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title": "Haarmonie Gelsenkirchen | Friseur mit Online-Terminbuchung",
+    "description": "Friseur- & Beauty-Salon in Gelsenkirchen. Damen- & Herrenschnitt, Coloration, Strähnen, Hochsteckfrisuren. Jetzt bequem online einen Termin buchen."
+  },
+  "nav": {
+    "services": "Leistungen",
+    "about": "Über uns",
+    "projects": "Galerie",
+    "contact": "Kontakt",
+    "ctaButton": "Termin buchen"
+  },
+  "hero": {
+    "eyebrow": "Friseur & Beauty · Gelsenkirchen",
+    "headline": "Ihr neuer Look — online gebucht in 60 Sekunden",
+    "subline": "Vom klassischen Schnitt bis zur Balayage: erleben Sie entspanntes Verwöhnen in Ihrem Salon im Herzen von Gelsenkirchen.",
+    "cta": "Termin online buchen",
+    "ctaServices": "Leistungen ansehen",
+    "badge1": "Online-Terminbuchung",
+    "badge2": "Meisterbetrieb",
+    "badge3": "Bio-Naturkosmetik"
+  },
+  "stats": {
+    "stat1": "Jahre Erfahrung",
+    "stat2": "Zufriedene Kunden",
+    "stat3": "Kundenbewertung",
+    "stat4": "Stylistinnen im Team"
+  },
+  "services": {
+    "badge": "Unsere Leistungen",
+    "title": "Was wir für Sie tun",
+    "subtitle": "Vom schnellen Schnitt bis zum kompletten Farb-Makeover — alles aus einer Hand.",
+    "service1Title": "Damenschnitt & Föhnen",
+    "service1Desc": "Typgerechter Schnitt inklusive Beratung, Waschen und Föhnen.",
+    "service2Title": "Herrenschnitt",
+    "service2Desc": "Klassisch oder modern — präziser Schnitt mit Konturen und Finish.",
+    "service3Title": "Coloration",
+    "service3Desc": "Brillante Farben mit hochwertigen, schonenden Produkten.",
+    "service4Title": "Strähnen & Balayage",
+    "service4Desc": "Natürliche Highlights, Foliensträhnen oder sanftes Balayage.",
+    "service5Title": "Hochsteckfrisuren",
+    "service5Desc": "Festlich gestylt für Hochzeit, Abschlussball oder besondere Anlässe.",
+    "service6Title": "Kinderschnitt",
+    "service6Desc": "Geduldig und kindgerecht — der erste Friseurbesuch wird zum Erlebnis.",
+    "duration": "ca. {min} Min."
+  },
+  "about": {
+    "badge": "Über uns",
+    "title": "Haarmonie — Ihr Salon zum Wohlfühlen",
+    "description": "Seit 2013 verbinden wir handwerkliches Können mit echter Beratung. Bei uns nehmen wir uns Zeit für Sie, hören zu und holen das Beste aus Ihrem Typ heraus — in entspannter Atmosphäre mitten in Gelsenkirchen.",
+    "feature1Title": "Persönliche Beratung",
+    "feature1Desc": "Wir nehmen uns Zeit und beraten Sie ehrlich zu Schnitt, Farbe und Pflege.",
+    "feature2Title": "Erfahrenes Team",
+    "feature2Desc": "Sechs ausgebildete Stylistinnen mit Liebe zum Detail.",
+    "feature3Title": "Bequem online buchen",
+    "feature3Desc": "Wählen Sie Leistung, Tag und Uhrzeit — ganz ohne Telefonschleife.",
+    "imageAlt": "Friseursalon Innenansicht",
+    "badgeExperience": "Salon seit 2013",
+    "badgeCert": "Bio-Naturkosmetik"
+  },
+  "process": {
+    "badge": "So einfach geht's",
+    "title": "In 4 Schritten zum Termin",
+    "subtitle": "Schnell, transparent und jederzeit von überall.",
+    "step1Title": "Termin wählen",
+    "step1Desc": "Leistung, Tag und freie Uhrzeit online auswählen — in unter einer Minute.",
+    "step2Title": "Bestätigung erhalten",
+    "step2Desc": "Sie bekommen sofort eine Bestätigung Ihres Wunschtermins.",
+    "step3Title": "Vorbeikommen",
+    "step3Desc": "Lehnen Sie sich zurück — unser Team kümmert sich um Ihren Look.",
+    "step4Title": "Strahlen",
+    "step4Desc": "Verlassen Sie den Salon mit einem Ergebnis, das genau zu Ihnen passt."
+  },
+  "projects": {
+    "badge": "Galerie",
+    "title": "Unsere Arbeit spricht für sich",
+    "subtitle": "Ein Einblick in Schnitte, Farben und Stylings aus unserem Salon."
+  },
+  "testimonials": {
+    "badge": "Bewertungen",
+    "title": "Was unsere Kunden sagen",
+    "subtitle": "Echte Erfahrungen — direkt von unseren Gästen."
+  },
+  "booking": {
+    "badge": "Online-Terminbuchung",
+    "title": "Buchen Sie Ihren Termin",
+    "subtitle": "Wählen Sie Leistung, Tag und Uhrzeit — wir freuen uns auf Sie.",
+    "step1Label": "Schritt 1 von 3",
+    "step1Title": "Leistung wählen",
+    "step2Label": "Schritt 2 von 3",
+    "step2Title": "Tag & Uhrzeit wählen",
+    "step3Label": "Schritt 3 von 3",
+    "step3Title": "Ihre Kontaktdaten",
+    "back": "Zurück",
+    "pickDate": "Bitte wählen Sie zuerst einen Tag aus.",
+    "noSlots": "An diesem Tag sind leider keine Termine mehr frei. Bitte wählen Sie einen anderen Tag.",
+    "durationShort": "{min} Min.",
+    "namePlaceholder": "Vor- und Nachname",
+    "emailPlaceholder": "E-Mail-Adresse",
+    "phonePlaceholder": "Telefonnummer",
+    "nameError": "Bitte geben Sie Ihren Namen ein.",
+    "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "phoneError": "Bitte geben Sie eine gültige Telefonnummer ein.",
+    "consentBefore": "Ich habe die",
+    "consentLink": "Datenschutzerklärung",
+    "consentAfter": "gelesen und stimme der Verarbeitung meiner Daten zur Terminbearbeitung zu.",
+    "consentError": "Bitte stimmen Sie der Datenverarbeitung zu.",
+    "submit": "Termin verbindlich buchen",
+    "submitting": "Wird gebucht...",
+    "slotTaken": "Dieser Termin wurde leider gerade vergeben. Bitte wählen Sie eine andere Uhrzeit.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "successToast": "Termin erfolgreich gebucht!",
+    "successTitle": "Termin bestätigt!",
+    "successSubtitle": "Wir freuen uns auf Ihren Besuch. Eine Bestätigung ist unterwegs.",
+    "summaryService": "Leistung",
+    "summaryDate": "Datum",
+    "summaryTime": "Uhrzeit",
+    "confirmWhatsApp": "Per WhatsApp bestätigen",
+    "newBooking": "Neuen Termin buchen",
+    "waMessage": "Hallo {salon}, ich möchte meinen Termin bestätigen: {service} am {date} um {time} Uhr. Mein Name: {name}."
+  },
+  "contact": {
+    "badge": "Kontakt",
+    "title": "Besuchen Sie uns",
+    "subtitle": "Di–Fr 9–19 Uhr · Sa 9–15 Uhr. So & Mo geschlossen.",
+    "address": "Adresse",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "hours": "Öffnungszeiten",
+    "mapTitle": "Standort Gelsenkirchen"
+  },
+  "chat": {
+    "title": "KI-Empfang",
+    "online": "Sofort verfügbar",
+    "placeholder": "Frage zu Preisen, Terminen ...",
+    "send": "Senden",
+    "welcome": "Hallo! 👋 Ich bin der KI-Empfang von Haarmonie. Fragen Sie mich nach Leistungen, Preisen oder Öffnungszeiten — oder buchen Sie direkt online einen Termin.",
+    "openLabel": "Chat öffnen",
+    "closeLabel": "Chat schließen",
+    "error": "Entschuldigung, es gab ein Problem. Bitte versuchen Sie es erneut."
+  },
+  "footer": {
+    "tagline": "Ihr Friseur- & Beauty-Salon in Gelsenkirchen seit 2013.",
+    "navigation": "Navigation",
+    "legal": "Rechtliches",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "copyright": "© 2025 Haarmonie Gelsenkirchen. Alle Rechte vorbehalten.",
+    "madeBy": "Website erstellt von",
+    "madeByLink": "kobiakov.dev"
+  },
+  "lang": {
+    "de": "DE",
+    "en": "EN"
+  }
+}

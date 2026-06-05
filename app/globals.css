@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+
+  /* Salon palette — variable names kept from template; values reskinned.
+     "blue*" = primary mauve-rose, "yellow*" = champagne-gold accent,
+     "slate*" = warm aubergine charcoal. */
+  --color-blue: #9e5e6e;
+  --color-blue-light: #c0849a;
+  --color-blue-dark: #7d4a57;
+  --color-blue-glow: #b06b7e;
+  --color-yellow: #c9a36a;
+  --color-yellow-dark: #a07d3f;
+  --color-yellow-light: #e6cfa0;
+  --color-slate: #2a2228;
+  --color-slate-light: #3d3038;
+  --color-slate-mid: #57464f;
+  --color-bg: #faf7f5;
+  --color-bg-alt: #f3ece8;
+  --color-text: #2a2228;
+  --color-muted: #8a7a80;
+  --color-border: #e7ddd8;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--color-blue);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-alt);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-blue-light);
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+
+  .container-narrow {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-blue {
+    background: linear-gradient(135deg, #9e5e6e 0%, #c0849a 50%, #b06b7e 100%);
+  }
+
+  .gradient-dark {
+    background: linear-gradient(180deg, #2a2228 0%, #3d3038 100%);
+  }
+
+  .bg-quote {
+    background: linear-gradient(160deg, #2a2228 0%, #3a2b33 60%, #2a2228 100%);
+  }
+}
