@@ -3,9 +3,14 @@
 @theme {
   --font-sans: var(--font-inter);
 
-  /* Salon palette — variable names kept from template; values reskinned.
-     "blue*" = primary mauve-rose, "yellow*" = champagne-gold accent,
-     "slate*" = warm aubergine charcoal. */
+  /* ======================================================================
+   * BRAND TOKENS — beim Fork unter einen neuen Kunden NUR diese ~11 Werte
+   * anpassen, dann ist die gesamte Palette projektweit umgefärbt.
+   * "blue*"  = Primärfarbe (hier: Mauve-Rosé)
+   * "yellow*"= Akzentfarbe (hier: Champagner-Gold)
+   * "slate*" = dunkle Neutraltöne (hier: warmes Aubergine-Anthrazit)
+   * Die Variablennamen stammen aus dem Template und sind bewusst generisch.
+   * ==================================================================== */
   --color-blue: #9e5e6e;
   --color-blue-light: #c0849a;
   --color-blue-dark: #7d4a57;

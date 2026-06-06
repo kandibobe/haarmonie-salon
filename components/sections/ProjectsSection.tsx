@@ -4,33 +4,43 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { X, ZoomIn } from 'lucide-react';
+import { X, ZoomIn, ArrowRight } from 'lucide-react';
+import { Link } from '@/i18n/routing';
 import { SectionBadge } from '@components/ui/SectionBadge';
 import { projects } from '@lib/config';
 
-export function ProjectsSection() {
+export function ProjectsSection({
+  showHeader = true,
+  teaser = false,
+}: {
+  showHeader?: boolean;
+  teaser?: boolean;
+} = {}) {
   const t = useTranslations('projects');
+  const tg = useTranslations('gallery');
   const [lightbox, setLightbox] = useState<(typeof projects)[number] | null>(null);
 
   return (
     <section id="projects" className="section-padding bg-[var(--color-bg)]">
       <div className="container-narrow">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <SectionBadge>{t('badge')}</SectionBadge>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-text)] mt-4 mb-3 tracking-tight">
-            {t('title')}
-          </h2>
-          <p className="text-[var(--color-muted)] text-base md:text-lg max-w-2xl mx-auto">
-            {t('subtitle')}
-          </p>
-        </motion.div>
+        {showHeader && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <SectionBadge>{t('badge')}</SectionBadge>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-text)] mt-4 mb-3 tracking-tight">
+              {t('title')}
+            </h2>
+            <p className="text-[var(--color-muted)] text-base md:text-lg max-w-2xl mx-auto">
+              {t('subtitle')}
+            </p>
+          </motion.div>
+        )}
 
         {/* Masonry grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] gap-3">
@@ -66,6 +76,19 @@ export function ProjectsSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Teaser-CTA (nur auf der Startseite) */}
+        {teaser && (
+          <div className="mt-10 text-center">
+            <Link
+              href="/galerie"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--color-slate)] hover:bg-[var(--color-slate-light)] text-white text-sm font-semibold transition-colors"
+            >
+              {tg('teaserCta')}
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}

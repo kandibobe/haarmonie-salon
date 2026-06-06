@@ -22,7 +22,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { cn } from '@lib/utils';
-import { salonConfig, services, type Service } from '@lib/config';
+import { salonConfig, services, team, type Service } from '@lib/config';
 
 const iconMap = { Scissors, User, Palette, Sparkles, Crown, Baby } as const;
 
@@ -44,6 +44,7 @@ interface Confirmed {
   date: string;
   time: string;
   name: string;
+  stylist: string | null;
 }
 
 /** Kommende buchbare Tage (pure, basierend auf salonConfig — kein Redis im Client). */
@@ -70,6 +71,7 @@ export function BookingWidget() {
 
   const [step, setStep] = useState<Step>(1);
   const [service, setService] = useState<Service | null>(null);
+  const [stylist, setStylist] = useState<string | null>(null);
   const [date, setDate] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [slots, setSlots] = useState<string[]>([]);
@@ -109,6 +111,8 @@ export function BookingWidget() {
     if (date) loadSlots(date);
   }, [date, loadSlots]);
 
+  const stylistName = stylist ? (team.find((m) => m.id === stylist)?.name ?? null) : null;
+
   const onSubmit = async (data: FormData) => {
     if (!service || !date || !time) return;
     try {
@@ -120,6 +124,7 @@ export function BookingWidget() {
           email: data.email,
           phone: data.phone,
           service: serviceTitle(service),
+          stylist: stylistName ?? '',
           date,
           time,
           consent: data.consent,
@@ -140,7 +145,7 @@ export function BookingWidget() {
       }
       if (!res.ok) throw new Error();
 
-      setConfirmed({ service: serviceTitle(service), date, time, name: data.name });
+      setConfirmed({ service: serviceTitle(service), date, time, name: data.name, stylist: stylistName });
       setStep('success');
       reset();
       toast.success(t('successToast'));
@@ -151,6 +156,7 @@ export function BookingWidget() {
 
   const resetAll = () => {
     setService(null);
+    setStylist(null);
     setDate(null);
     setTime(null);
     setSlots([]);
@@ -412,6 +418,42 @@ export function BookingWidget() {
                 </div>
               )}
 
+              {/* Wunsch-Stylist (optional) */}
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-2">
+                  {t('stylistLabel')}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setStylist(null)}
+                    className={cn(
+                      'px-3.5 py-2 rounded-xl border text-xs font-semibold transition-colors',
+                      stylist === null
+                        ? 'border-[var(--color-blue)] bg-[var(--color-blue)] text-white'
+                        : 'border-[var(--color-border)] hover:border-[var(--color-blue-light)] text-[var(--color-text)]'
+                    )}
+                  >
+                    {t('stylistAny')}
+                  </button>
+                  {team.map((m) => (
+                    <button
+                      key={m.id}
+                      type="button"
+                      onClick={() => setStylist(m.id)}
+                      className={cn(
+                        'px-3.5 py-2 rounded-xl border text-xs font-semibold transition-colors',
+                        stylist === m.id
+                          ? 'border-[var(--color-blue)] bg-[var(--color-blue)] text-white'
+                          : 'border-[var(--color-border)] hover:border-[var(--color-blue-light)] text-[var(--color-text)]'
+                      )}
+                    >
+                      {m.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="space-y-4">
                 <div>
                   <input
@@ -505,6 +547,12 @@ export function BookingWidget() {
                   <span className="text-[var(--color-muted)]">{t('summaryService')}</span>
                   <span className="font-semibold text-[var(--color-text)]">{confirmed.service}</span>
                 </div>
+                {confirmed.stylist && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-[var(--color-muted)]">{t('summaryStylist')}</span>
+                    <span className="font-semibold text-[var(--color-text)]">{confirmed.stylist}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--color-muted)]">{t('summaryDate')}</span>
                   <span className="font-semibold text-[var(--color-text)]">

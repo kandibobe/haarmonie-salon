@@ -10,6 +10,8 @@ import { Footer } from '@components/layout/Footer';
 import { DemoBanner } from '@components/ui/DemoBanner';
 import { FloatingCallButton } from '@components/ui/FloatingCallButton';
 import { ChatWidget } from '@components/chat/ChatWidget';
+import { ConsentProvider } from '@components/features/consent/ConsentProvider';
+import { CookieBanner } from '@components/features/consent/CookieBanner';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { routing } from '@/i18n/routing';
@@ -18,28 +20,27 @@ import '../globals.css';
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'HairSalon',
+  '@type': salonConfig.businessType,
   name: salonConfig.name,
-  description:
-    'Friseur- & Beauty-Salon in Gelsenkirchen mit Online-Terminbuchung: Damen- & Herrenschnitt, Coloration, Strähnen, Hochsteckfrisuren.',
+  description: salonConfig.seo.description,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Bahnhofstraße 24',
-    addressLocality: 'Gelsenkirchen',
-    postalCode: '45879',
-    addressCountry: 'DE',
+    streetAddress: salonConfig.structuredAddress.street,
+    addressLocality: salonConfig.structuredAddress.locality,
+    postalCode: salonConfig.structuredAddress.postalCode,
+    addressCountry: salonConfig.structuredAddress.country,
   },
   telephone: salonConfig.phone,
   email: salonConfig.email,
-  url: process.env.NEXT_PUBLIC_APP_URL || 'https://friseur-demo.vercel.app',
+  url: process.env.NEXT_PUBLIC_APP_URL || salonConfig.defaultUrl,
   openingHours: ['Tu-Fr 09:00-19:00', 'Sa 09:00-15:00'],
   priceRange: '€€',
-  areaServed: { '@type': 'City', name: 'Gelsenkirchen' },
+  areaServed: { '@type': 'City', name: salonConfig.structuredAddress.locality },
   hasMap: salonConfig.googleMapsEmbedUrl,
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '128',
+    ratingValue: salonConfig.aggregateRating.ratingValue,
+    reviewCount: salonConfig.aggregateRating.reviewCount,
   },
 };
 
@@ -59,7 +60,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(
-      process.env.NEXT_PUBLIC_APP_URL || 'https://elektro-becker-demo.vercel.app'
+      process.env.NEXT_PUBLIC_APP_URL || salonConfig.defaultUrl
     ),
     title: t('title'),
     description: t('description'),
@@ -113,13 +114,16 @@ export default async function LocaleLayout({
       </head>
       <body className={`${inter.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <DemoBanner />
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <FloatingCallButton />
-          <ChatWidget />
-          <Toaster position="bottom-center" richColors />
+          <ConsentProvider>
+            <DemoBanner />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <FloatingCallButton />
+            <ChatWidget />
+            <CookieBanner />
+            <Toaster position="bottom-center" richColors />
+          </ConsentProvider>
         </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />

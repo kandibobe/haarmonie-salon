@@ -1,26 +1,20 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Scissors, MapPin, Phone, Mail } from 'lucide-react';
+import { Scissors, MapPin, Phone, Mail, Cookie } from 'lucide-react';
 import { Link } from '@/i18n/routing';
-import { salonConfig } from '@lib/config';
-
-const navSections = ['services', 'about', 'projects', 'contact'] as const;
+import { salonConfig, navItems } from '@lib/config';
+import { openCookieSettings } from '@components/features/consent/ConsentProvider';
 
 export function Footer() {
   const t = useTranslations('nav');
   const tf = useTranslations('footer');
-
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const td = useTranslations('demo');
 
   return (
     <footer className="bg-[var(--color-slate)] text-white/80">
       <div className="container-narrow py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
@@ -31,17 +25,19 @@ export function Footer() {
             </div>
             <p className="text-sm leading-relaxed text-white/55">{tf('tagline')}</p>
 
-            <p className="text-[10px] text-white/35 leading-relaxed border border-white/10 rounded-lg px-3 py-2">
-              ⚠ Demo-Projekt · Alle Angaben fiktiv ·{' '}
-              <a
-                href="https://kobiakov.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--color-yellow)]/70 hover:text-[var(--color-yellow)] transition-colors"
-              >
-                kobiakov.dev
-              </a>
-            </p>
+            {salonConfig.demo.enabled && (
+              <p className="text-[10px] text-white/35 leading-relaxed border border-white/10 rounded-lg px-3 py-2">
+                ⚠ {td('footerNote')}{' '}
+                <a
+                  href={salonConfig.demo.authorUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--color-yellow)]/70 hover:text-[var(--color-yellow)] transition-colors"
+                >
+                  {salonConfig.demo.author}
+                </a>
+              </p>
+            )}
 
             <div className="flex flex-wrap gap-2 pt-1">
               {salonConfig.highlights.map((item) => (
@@ -61,15 +57,14 @@ export function Footer() {
               {tf('navigation')}
             </h3>
             <ul className="space-y-2">
-              {navSections.map((key) => (
-                <li key={key}>
-                  <button
-                    type="button"
-                    onClick={() => scrollTo(key)}
+              {navItems.map((item) => (
+                <li key={item.key}>
+                  <Link
+                    href={item.href}
                     className="text-sm text-white/55 hover:text-[var(--color-yellow)] transition-colors"
                   >
-                    {t(key)}
-                  </button>
+                    {t(item.key)}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -85,14 +80,18 @@ export function Footer() {
                 <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--color-blue-light)]" />
                 <span>
                   {salonConfig.addressDisplay}{' '}
-                  <span className="text-white/30 text-xs">(fiktiv)</span>
+                  {salonConfig.demo.enabled && (
+                    <span className="text-white/30 text-xs">({td('fictional')})</span>
+                  )}
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={14} className="shrink-0 text-[var(--color-blue-light)]" />
                 <span>
                   {salonConfig.phone}{' '}
-                  <span className="text-white/30 text-xs">(fiktiv)</span>
+                  {salonConfig.demo.enabled && (
+                    <span className="text-white/30 text-xs">({td('fictional')})</span>
+                  )}
                 </span>
               </li>
               <li className="flex items-center gap-2">
@@ -114,6 +113,20 @@ export function Footer() {
               >
                 {tf('datenschutz')}
               </Link>
+              <Link
+                href="/agb"
+                className="text-white/40 hover:text-white/70 transition-colors w-fit"
+              >
+                {tf('agb')}
+              </Link>
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="flex items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors w-fit"
+              >
+                <Cookie size={12} />
+                {tf('cookieSettings')}
+              </button>
             </div>
           </div>
         </div>
@@ -124,7 +137,7 @@ export function Footer() {
           <span>
             {tf('madeBy')}{' '}
             <a
-              href="https://kobiakov.dev"
+              href={salonConfig.demo.authorUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--color-blue-light)] hover:text-white transition-colors"

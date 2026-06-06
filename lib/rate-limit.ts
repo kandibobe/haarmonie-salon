@@ -25,6 +25,14 @@ const limiters = {
         analytics: false,
       })
     : null,
+  contact: redis
+    ? new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(5, '10 m'),
+        prefix: 'rl:contact',
+        analytics: false,
+      })
+    : null,
 } as const;
 
 export type RateLimitScope = keyof typeof limiters;

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
 import { cn } from '@lib/utils';
+import { useConsent } from '@components/features/consent/ConsentProvider';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -13,18 +14,21 @@ interface Message {
 
 export function ChatWidget() {
   const t = useTranslations('chat');
+  const tc = useTranslations('consent');
+  const { consent, save } = useConsent();
+  const aiAllowed = consent?.ai ?? false;
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Welcome message on first open.
+  // Welcome message on first open (only once AI chat is consented).
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
+    if (isOpen && aiAllowed && messages.length === 0) {
       setMessages([{ role: 'assistant', content: t('welcome') }]);
     }
-  }, [isOpen, messages.length, t]);
+  }, [isOpen, aiAllowed, messages.length, t]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -125,6 +129,25 @@ export function ChatWidget() {
               </div>
             </div>
 
+            {!aiAllowed ? (
+              /* DSGVO-Gate: KI-Chat erst nach Zustimmung (Daten gehen an Google). */
+              <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 p-6 bg-[var(--color-bg)]">
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-yellow)]/15 flex items-center justify-center">
+                  <Sparkles size={22} className="text-[var(--color-yellow-dark)]" />
+                </div>
+                <h3 className="text-sm font-bold text-[var(--color-text)]">{tc('aiGateTitle')}</h3>
+                <p className="text-xs text-[var(--color-muted)] max-w-[15rem] leading-relaxed">
+                  {tc('aiGateText')}
+                </p>
+                <button
+                  onClick={() => save({ maps: consent?.maps ?? false, ai: true })}
+                  className="mt-1 px-5 py-2 rounded-full bg-[var(--color-blue)] hover:bg-[var(--color-blue-light)] text-white text-sm font-semibold transition-colors"
+                >
+                  {tc('aiGateButton')}
+                </button>
+              </div>
+            ) : (
+              <>
             {/* Messages */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 bg-[var(--color-bg)]">
               {messages.map((m, i) => (
@@ -163,6 +186,8 @@ export function ChatWidget() {
                 </button>
               </div>
             </form>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

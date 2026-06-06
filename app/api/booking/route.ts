@@ -12,6 +12,7 @@ const schema = z.object({
   email: z.string().email().max(150),
   phone: z.string().min(7).max(30),
   service: z.string().min(1).max(80),
+  stylist: z.string().max(80).optional().or(z.literal('')),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   time: z.string().regex(/^\d{2}:\d{2}$/),
   consent: z.literal(true),
@@ -87,7 +88,7 @@ export async function POST(request: Request) {
       to: [salonEmail],
       replyTo: data.email,
       subject: `Neue Online-Buchung: ${data.name} — ${dateDE} ${data.time}`,
-      text: `Neue Online-Terminbuchung\n\nName: ${data.name}\nE-Mail: ${data.email}\nTelefon: ${data.phone}\nLeistung: ${serviceLabel}\nTermin: ${dateDE} um ${data.time} Uhr`,
+      text: `Neue Online-Terminbuchung\n\nName: ${data.name}\nE-Mail: ${data.email}\nTelefon: ${data.phone}\nLeistung: ${serviceLabel}${data.stylist ? `\nStylist: ${data.stylist}` : ''}\nTermin: ${dateDE} um ${data.time} Uhr`,
       html: emailShell(
         'Neue Online-Terminbuchung',
         rows([
@@ -95,6 +96,7 @@ export async function POST(request: Request) {
           ['E-Mail', `<a href="mailto:${esc(data.email)}" style="color:#9e5e6e;">${esc(data.email)}</a>`],
           ['Telefon', `<a href="tel:${esc(data.phone)}" style="color:#9e5e6e;">${esc(data.phone)}</a>`],
           ['Leistung', esc(serviceLabel)],
+          ...(data.stylist ? ([['Stylist', esc(data.stylist)]] as [string, string][]) : []),
           ['Termin', `${dateDE} um ${data.time} Uhr`],
         ])
       ),

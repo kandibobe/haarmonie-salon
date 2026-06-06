@@ -6,14 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Scissors, Phone } from 'lucide-react';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { cn } from '@lib/utils';
-import { salonConfig } from '@lib/config';
-
-const navItems = [
-  { key: 'services', href: '#services' },
-  { key: 'about', href: '#about' },
-  { key: 'projects', href: '#projects' },
-  { key: 'contact', href: '#contact' },
-] as const;
+import { salonConfig, navItems } from '@lib/config';
 
 export function Header() {
   const t = useTranslations('nav');
@@ -34,11 +27,18 @@ export function Header() {
     router.replace(pathname, { locale: next });
   };
 
-  const scrollTo = (href: string) => {
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+  // CTA → Buchungsbereich der Startseite. Auf der Startseite sanft scrollen,
+  // sonst via Router zur Startseite mit Anker navigieren.
+  const goToBooking = () => {
     setMobileOpen(false);
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (pathname === '/') {
+      document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/#booking');
+    }
   };
 
   return (
@@ -47,7 +47,7 @@ export function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
           ? 'bg-[var(--color-slate)]/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+          : 'bg-[var(--color-slate)]/80 backdrop-blur-sm'
       )}
     >
       <nav className="container-narrow flex items-center justify-between h-16 md:h-20">
@@ -65,12 +65,17 @@ export function Header() {
         <ul className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <li key={item.key}>
-              <button
-                onClick={() => scrollTo(item.href)}
-                className="text-sm text-white/75 hover:text-[var(--color-yellow)] transition-colors font-medium"
+              <Link
+                href={item.href}
+                className={cn(
+                  'text-sm transition-colors font-medium',
+                  isActive(item.href)
+                    ? 'text-[var(--color-yellow)]'
+                    : 'text-white/75 hover:text-[var(--color-yellow)]'
+                )}
               >
                 {t(item.key)}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
@@ -91,7 +96,7 @@ export function Header() {
             {locale === 'de' ? 'EN' : 'DE'}
           </button>
           <button
-            onClick={() => scrollTo('#booking')}
+            onClick={goToBooking}
             className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-[var(--color-blue)] hover:bg-[var(--color-blue-light)] text-white text-sm font-semibold transition-colors shadow-lg shadow-[var(--color-blue)]/30"
           >
             <Scissors size={13} />
@@ -130,12 +135,18 @@ export function Header() {
             <ul className="container-narrow py-4 flex flex-col gap-1">
               {navItems.map((item) => (
                 <li key={item.key}>
-                  <button
-                    onClick={() => scrollTo(item.href)}
-                    className="w-full text-left py-3 text-white/80 hover:text-[var(--color-yellow)] text-sm font-medium transition-colors"
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      'block w-full py-3 text-sm font-medium transition-colors',
+                      isActive(item.href)
+                        ? 'text-[var(--color-yellow)]'
+                        : 'text-white/80 hover:text-[var(--color-yellow)]'
+                    )}
                   >
                     {t(item.key)}
-                  </button>
+                  </Link>
                 </li>
               ))}
               <li className="pt-2 flex flex-col gap-2">
@@ -148,7 +159,7 @@ export function Header() {
                   {salonConfig.phone}
                 </a>
                 <button
-                  onClick={() => scrollTo('#booking')}
+                  onClick={goToBooking}
                   className="w-full py-3 rounded-full bg-[var(--color-blue)] text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2"
                 >
                   <Scissors size={13} />

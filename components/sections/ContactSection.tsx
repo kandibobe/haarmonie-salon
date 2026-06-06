@@ -4,9 +4,10 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { SectionBadge } from '@components/ui/SectionBadge';
+import { MapEmbed } from '@components/features/consent/MapEmbed';
 import { salonConfig } from '@lib/config';
 
-export function ContactSection() {
+export function ContactSection({ showHeader = true }: { showHeader?: boolean } = {}) {
   const t = useTranslations('contact');
 
   const cards = [
@@ -44,21 +45,23 @@ export function ContactSection() {
     <section id="contact" className="section-padding bg-[var(--color-bg)]">
       <div className="container-narrow">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
-        >
-          <SectionBadge>{t('badge')}</SectionBadge>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-text)] mt-4 mb-3 tracking-tight">
-            {t('title')}
-          </h2>
-          <p className="text-[var(--color-muted)] text-base md:text-lg max-w-xl mx-auto">
-            {t('subtitle')}
-          </p>
-        </motion.div>
+        {showHeader && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <SectionBadge>{t('badge')}</SectionBadge>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-text)] mt-4 mb-3 tracking-tight">
+              {t('title')}
+            </h2>
+            <p className="text-[var(--color-muted)] text-base md:text-lg max-w-xl mx-auto">
+              {t('subtitle')}
+            </p>
+          </motion.div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Info cards */}
@@ -107,18 +110,9 @@ export function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="rounded-2xl overflow-hidden border border-[var(--color-border)] shadow-sm h-[320px] lg:h-auto"
+            className="rounded-2xl overflow-hidden border border-[var(--color-border)] shadow-sm h-[320px] lg:h-auto min-h-[320px]"
           >
-            <iframe
-              src={salonConfig.googleMapsEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: '320px' }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={t('mapTitle')}
-            />
+            <MapEmbed title={t('mapTitle')} className="w-full h-full min-h-[320px]" />
           </motion.div>
         </div>
       </div>
