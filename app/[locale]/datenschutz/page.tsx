@@ -60,7 +60,7 @@ export default function DatenschutzPage() {
             <p className="mt-2 leading-relaxed">
               Zur Verwaltung freier und belegter Termine wird der gebuchte Zeitpunkt in einem
               Datenbankdienst (Upstash Redis) gespeichert. In dieser Demo werden die Daten nur zu
-              Demonstrationszwecken verarbeitet und nach kurzer Zeit automatisch gelöscht.
+              Demonstrationszwecken verarbeitet und nach 60 Tagen automatisch gelöscht.
             </p>
           </section>
 
@@ -132,7 +132,26 @@ export default function DatenschutzPage() {
           </section>
 
           <section>
-            <h2 className="text-base font-bold text-[var(--color-text)] mb-2">7. Ihre Rechte</h2>
+            <h2 className="text-base font-bold text-[var(--color-text)] mb-2">7. Bildmaterial (Unsplash)</h2>
+            <p className="leading-relaxed">
+              Einige Bilder auf dieser Website werden über den Dienst Unsplash (Unsplash Inc., 500
+              rue Notre-Dame Ouest, Montréal, QC, Kanada) eingebunden. Beim Abrufen der Bilder kann
+              Unsplash technische Daten (z. B. IP-Adresse) empfangen. Weitere Informationen finden
+              Sie in der{' '}
+              <a
+                href="https://unsplash.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--color-blue-glow)] underline hover:no-underline"
+              >
+                Datenschutzerklärung von Unsplash
+              </a>
+              .
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-base font-bold text-[var(--color-text)] mb-2">8. Ihre Rechte</h2>
             <p className="leading-relaxed">
               Sie haben gemäß DSGVO das Recht auf Auskunft, Berichtigung, Löschung und
               Einschränkung der Verarbeitung Ihrer personenbezogenen Daten. Wenden Sie sich hierzu

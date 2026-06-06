@@ -42,7 +42,7 @@ export function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-slate)]/40 via-transparent to-transparent" />
             </div>
 
-            {/* Badge: Meisterbetrieb seit 2004 */}
+            {/* Badge: Meisterbetrieb seit 2013 */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -63,7 +63,7 @@ export function AboutSection() {
               </div>
             </motion.div>
 
-            {/* Badge: TÜV */}
+            {/* Badge: Bio */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -86,7 +86,7 @@ export function AboutSection() {
           >
             <SectionBadge>{t('badge')}</SectionBadge>
 
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--color-text)] tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text)] leading-tight">
               {t('title')}
             </h2>
 
@@ -96,10 +96,26 @@ export function AboutSection() {
 
             {/* Feature list */}
             <div className="space-y-4 pt-2">
-              {features.map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-blue)]/10 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon size={18} className="text-[var(--color-blue-glow)]" />
+              {features.map(({ icon: Icon, title, desc }, idx) => (
+                <div
+                  key={title}
+                  className="flex gap-4 border-l-2 border-[var(--color-blue-light)]/60 pl-4 py-1"
+                >
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${
+                      idx === 0
+                        ? 'bg-[var(--color-yellow)]/15'
+                        : 'bg-[var(--color-blue)]/10'
+                    }`}
+                  >
+                    <Icon
+                      size={18}
+                      className={
+                        idx === 0
+                          ? 'text-[var(--color-yellow-dark)]'
+                          : 'text-[var(--color-blue-glow)]'
+                      }
+                    />
                   </div>
                   <div>
                     <div className="font-semibold text-sm text-[var(--color-text)] mb-0.5">{title}</div>
@@ -108,6 +124,13 @@ export function AboutSection() {
                 </div>
               ))}
             </div>
+
+            {/* Pull-quote */}
+            <blockquote className="relative border-l-0 pl-0 mt-4">
+              <p className="font-heading-italic text-lg text-[var(--color-blue-glow)] leading-snug">
+                „Seit 2013 — über 3.000 glückliche Kunden in Gelsenkirchen."
+              </p>
+            </blockquote>
 
             {/* Highlights */}
             <div className="flex flex-wrap gap-2 pt-2">

@@ -7,6 +7,8 @@ import { ProjectsSection } from '@components/sections/ProjectsSection';
 import { TestimonialsSection } from '@components/sections/TestimonialsSection';
 import { BookingSection } from '@components/sections/BookingSection';
 import { ContactSection } from '@components/sections/ContactSection';
+import { HireCTASection } from '@components/sections/HireCTASection';
+import { FaqSection } from '@components/sections/FaqSection';
 
 export default function HomePage() {
   return (
@@ -18,8 +20,10 @@ export default function HomePage() {
       <ProcessSection />
       <ProjectsSection teaser />
       <TestimonialsSection />
+      <FaqSection />
       <BookingSection />
       <ContactSection />
+      <HireCTASection />
     </>
   );
 }

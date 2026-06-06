@@ -144,7 +144,7 @@
     "online": "Available now",
     "placeholder": "Ask about prices, appointments ...",
     "send": "Send",
-    "welcome": "Hi! 👋 I'm Haarmonie's AI reception. Ask me about services, prices or opening hours — or book an appointment online right away.",
+    "welcome": "Hi! 👋 I'm an AI assistant (not a real person) helping you with Haarmonie Salon. Ask me about services, prices or opening hours — or book an appointment online right away.",
     "openLabel": "Open chat",
     "closeLabel": "Close chat",
     "error": "Sorry, something went wrong. Please try again."
@@ -163,7 +163,8 @@
   },
   "demo": {
     "bannerLabel": "Demo website ·",
-    "bannerText": "This website is a fictional demonstration project. All details (company, prices, reviews, contact data) are fictional and serve illustration purposes only.",
+    "bannerText": "All details are fictional · similar website for your business:",
+    "bannerCta": "Request free consultation →",
     "footerNote": "Demo project · All details fictional ·",
     "fictional": "fictional"
   },
@@ -326,5 +327,33 @@
   "lang": {
     "de": "DE",
     "en": "EN"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Questions & Answers",
+    "subtitle": "Everything you need to know before your visit — answered quickly.",
+    "q1Q": "How does online booking work?",
+    "q1A": "Simply choose your desired service, a free time slot, and enter your contact details. Booking takes under 60 seconds. You'll receive an instant confirmation by email.",
+    "q2Q": "Can I cancel my appointment for free?",
+    "q2A": "Yes, you can cancel free of charge up to 24 hours in advance. Please let us know by phone or email. For no-shows without notice, we reserve the right to charge a cancellation fee.",
+    "q3Q": "How far in advance should I book?",
+    "q3A": "For simple cuts, we recommend booking 2–3 days ahead. For coloring, balayage or bridal styling, please book at least 1–2 weeks in advance, as these slots fill up quickly.",
+    "q4Q": "Are washing and blow-drying included in the price?",
+    "q4A": "For women's cuts, washing and blow-drying are already included in the listed prices. Men's cuts are done dry; washing is optional. See our full price list for details.",
+    "q5Q": "What payment methods do you accept?",
+    "q5A": "We accept cash and debit cards (Girocard). Credit cards (Visa, Mastercard) are also welcome. Gift cards can be redeemed directly in the salon.",
+    "q6Q": "Do you cut children's hair, and from what age?",
+    "q6A": "We cut children's hair from age 3. Our stylists have plenty of experience with the youngest guests and always take extra time. Special prices apply for children up to 6 — just select 'Children's Cut' when booking."
+  },
+  "hireCta": {
+    "badge": "Demo project · Built by a developer",
+    "headline": "Like what you see?",
+    "subline": "I can build a custom website like this for your salon — ready in 7 days, GDPR-compliant, with real online booking.",
+    "feature1": "Online Appointment Booking",
+    "feature2": "AI Reception Chat",
+    "feature3": "GDPR-Compliant",
+    "ctaPrimary": "Free Consultation",
+    "ctaSecondary": "View Portfolio",
+    "finePrint": "from €600 · ready in 1 week · built by"
   }
 }

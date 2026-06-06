@@ -1,8 +1,8 @@
 const COLORS = [
-  { bg: '#1e40af', text: '#fff' },
-  { bg: '#2563eb', text: '#fff' },
-  { bg: '#fbbf24', text: '#1e293b' },
-  { bg: '#334155', text: '#fff' },
+  { bg: '#9e5e6e', text: '#fff' },
+  { bg: '#7d4a57', text: '#fff' },
+  { bg: '#c9a36a', text: '#2a2228' },
+  { bg: '#57464f', text: '#fff' },
 ];
 
 function initials(name: string): string {

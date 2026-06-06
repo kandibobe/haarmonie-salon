@@ -22,9 +22,19 @@ export function DemoBanner() {
             href={salonConfig.demo.authorUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/90 underline underline-offset-2 hover:text-[var(--color-yellow)] transition-colors"
+            className="font-semibold text-[var(--color-yellow)] underline underline-offset-2 hover:brightness-110 transition-colors"
           >
             {salonConfig.demo.author}
+          </a>
+          {' '}
+          <span className="hidden sm:inline text-white/40">·</span>{' '}
+          <a
+            href={`${salonConfig.demo.authorUrl}/contact`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline text-white/55 underline underline-offset-2 hover:text-[var(--color-yellow)] transition-colors"
+          >
+            {t('bannerCta')}
           </a>
         </p>
         <button

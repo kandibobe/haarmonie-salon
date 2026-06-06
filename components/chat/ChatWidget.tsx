@@ -89,17 +89,18 @@ export function ChatWidget() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.5, type: 'spring', stiffness: 260, damping: 20 }}
         onClick={() => setIsOpen((v) => !v)}
-        className="fixed bottom-6 right-6 z-[95] w-14 h-14 rounded-full bg-[var(--color-blue)] hover:bg-[var(--color-blue-light)] text-white shadow-xl shadow-[var(--color-blue)]/40 flex items-center justify-center transition-colors"
+        className="fixed bottom-6 right-6 z-[95] w-14 h-14 rounded-full bg-[var(--color-blue)] hover:bg-[var(--color-blue-light)] text-white shadow-xl shadow-[var(--color-blue)]/40 flex flex-col items-center justify-center gap-0.5 transition-colors"
         aria-label={isOpen ? t('closeLabel') : t('openLabel')}
       >
         <AnimatePresence mode="wait" initial={false}>
           {isOpen ? (
             <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-              <X size={22} />
+              <X size={20} />
             </motion.span>
           ) : (
-            <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <MessageCircle size={22} />
+            <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} className="flex flex-col items-center gap-0.5">
+              <MessageCircle size={18} />
+              <span className="text-[9px] font-bold leading-none tracking-wider opacity-90">KI</span>
             </motion.span>
           )}
         </AnimatePresence>

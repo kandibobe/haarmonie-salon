@@ -3,7 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ChevronDown, CalendarCheck, Sparkles, Award } from 'lucide-react';
+import { ChevronDown, CalendarCheck, Sparkles, Award, Star } from 'lucide-react';
+import { salonConfig } from '@lib/config';
 
 export function HeroSection() {
   const t = useTranslations('hero');
@@ -24,8 +25,10 @@ export function HeroSection() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a2228]/70 via-[#2a2228]/55 to-[#2a2228]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#9e5e6e]/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2a2228]/75 via-[#2a2228]/60 to-[#2a2228]/92" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#9e5e6e]/25 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#c9a36a]/8 via-transparent to-transparent" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_bottom_left,_#9e5e6e22_0%,_transparent_70%)]" />
       </div>
 
       {/* Content */}
@@ -49,13 +52,13 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-[1.08] tracking-tight"
+          className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-[1.1]"
           style={{ textShadow: '0 4px 32px rgba(0,0,0,0.5)' }}
         >
           {t('headline')}
         </motion.h1>
 
-        {/* Separator line */}
+        {/* Separator */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -120,6 +123,27 @@ export function HeroSection() {
           ))}
         </motion.div>
       </div>
+
+      {/* Floating rating card */}
+      <motion.div
+        initial={{ opacity: 0, x: 24 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 1.8 }}
+        className="absolute bottom-24 right-6 md:right-12 z-10 bg-white/12 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-2xl hidden sm:flex flex-col items-start gap-1.5"
+      >
+        <div className="flex items-center gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} size={11} className="text-[var(--color-yellow)] fill-[var(--color-yellow)]" />
+          ))}
+        </div>
+        <div className="text-white font-bold text-base leading-none">
+          {salonConfig.aggregateRating.ratingValue}
+          <span className="text-white/55 font-normal text-xs ml-1">/ 5</span>
+        </div>
+        <div className="text-white/55 text-[10px] leading-tight">
+          {salonConfig.aggregateRating.reviewCount} Bewertungen · Google
+        </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.button

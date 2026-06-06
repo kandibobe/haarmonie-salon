@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { checkRateLimit, getClientIp } from '@lib/rate-limit';
 
 // Einfaches Demo-Passwort-Gate (kein NextAuth nötig für eine Demo).
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'haarmonie-demo';
@@ -7,6 +8,20 @@ const COOKIE = 'admin_auth';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
+  // CSRF: only same-origin requests allowed
+  const origin = request.headers.get('origin');
+  const host = request.headers.get('host');
+  if (origin && host && !origin.includes(host)) {
+    return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+  }
+
+  // Rate limit: 3 attempts per 15 minutes per IP
+  const ip = getClientIp(request);
+  const { success } = await checkRateLimit('adminLogin', ip);
+  if (!success) {
+    return NextResponse.json({ error: 'too_many_requests' }, { status: 429 });
+  }
+
   const { password } = await request.json().catch(() => ({ password: '' }));
   if (password !== ADMIN_PASSWORD) {
     return NextResponse.json({ error: 'invalid' }, { status: 401 });

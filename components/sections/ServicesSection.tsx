@@ -11,6 +11,10 @@ const iconMap = { Scissors, User, Palette, Sparkles, Crown, Baby } as const;
 export function ServicesSection() {
   const t = useTranslations('services');
 
+  const scrollToBooking = () => {
+    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="services" className="section-padding bg-[var(--color-bg)]">
       <div className="container-narrow">
@@ -23,7 +27,7 @@ export function ServicesSection() {
           className="text-center mb-14"
         >
           <SectionBadge>{t('badge')}</SectionBadge>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-text)] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-[var(--color-text)] mt-4 mb-3">
             {t('title')}
           </h2>
           <p className="text-[var(--color-muted)] text-base md:text-lg max-w-2xl mx-auto">
@@ -36,6 +40,7 @@ export function ServicesSection() {
           {services.map((service, i) => {
             const Icon = iconMap[service.icon as keyof typeof iconMap];
             const isBlue = service.color === 'blue';
+            const isBestseller = service.id === 'straehnen';
 
             return (
               <motion.div
@@ -45,8 +50,15 @@ export function ServicesSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 whileHover={{ y: -4 }}
-                className="group bg-white rounded-2xl p-7 border border-[var(--color-border)] hover:border-[var(--color-blue-light)] hover:shadow-xl hover:shadow-[var(--color-blue)]/8 transition-all duration-300 cursor-pointer"
+                className="group relative bg-white rounded-2xl p-7 border border-[var(--color-border)] hover:border-[var(--color-blue-light)] hover:shadow-xl hover:shadow-[var(--color-blue)]/8 transition-all duration-300 cursor-pointer overflow-hidden"
               >
+                {/* Bestseller badge */}
+                {isBestseller && (
+                  <div className="absolute top-4 right-4 bg-[var(--color-yellow)] text-[var(--color-slate)] text-[10px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1 leading-none">
+                    Bestseller
+                  </div>
+                )}
+
                 {/* Icon */}
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 ${
@@ -77,6 +89,17 @@ export function ServicesSection() {
                   <span className="text-xs text-[var(--color-muted)]">
                     {t('duration', { min: service.duration })}
                   </span>
+                </div>
+
+                {/* Hover booking CTA */}
+                <div className="overflow-hidden max-h-0 group-hover:max-h-10 transition-all duration-300 ease-out">
+                  <button
+                    type="button"
+                    onClick={scrollToBooking}
+                    className="mt-3 text-xs font-semibold text-[var(--color-blue-glow)] hover:text-[var(--color-blue)] flex items-center gap-1 transition-colors"
+                  >
+                    Jetzt buchen →
+                  </button>
                 </div>
               </motion.div>
             );

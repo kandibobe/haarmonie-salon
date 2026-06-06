@@ -33,6 +33,14 @@ const limiters = {
         analytics: false,
       })
     : null,
+  adminLogin: redis
+    ? new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(3, '15 m'),
+        prefix: 'rl:adminLogin',
+        analytics: false,
+      })
+    : null,
 } as const;
 
 export type RateLimitScope = keyof typeof limiters;

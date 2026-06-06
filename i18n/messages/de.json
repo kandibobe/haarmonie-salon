@@ -144,7 +144,7 @@
     "online": "Sofort verfügbar",
     "placeholder": "Frage zu Preisen, Terminen ...",
     "send": "Senden",
-    "welcome": "Hallo! 👋 Ich bin der KI-Empfang von Haarmonie. Fragen Sie mich nach Leistungen, Preisen oder Öffnungszeiten — oder buchen Sie direkt online einen Termin.",
+    "welcome": "Hallo! 👋 Ich bin ein KI-Assistent (keine echte Person) und helfe Ihnen beim Haarmonie-Salon. Fragen Sie mich nach Leistungen, Preisen oder Öffnungszeiten — oder buchen Sie direkt online einen Termin.",
     "openLabel": "Chat öffnen",
     "closeLabel": "Chat schließen",
     "error": "Entschuldigung, es gab ein Problem. Bitte versuchen Sie es erneut."
@@ -163,7 +163,8 @@
   },
   "demo": {
     "bannerLabel": "Demo-Website ·",
-    "bannerText": "Diese Website ist ein fiktives Demonstrationsprojekt. Alle Angaben (Firma, Preise, Bewertungen, Kontaktdaten) sind fiktiv und dienen ausschließlich der Veranschaulichung.",
+    "bannerText": "Alle Angaben fiktiv · ähnliche Website für Ihr Business:",
+    "bannerCta": "Kostenloses Gespräch anfragen →",
     "footerNote": "Demo-Projekt · Alle Angaben fiktiv ·",
     "fictional": "fiktiv"
   },
@@ -326,5 +327,33 @@
   "lang": {
     "de": "DE",
     "en": "EN"
+  },
+  "faq": {
+    "badge": "Häufige Fragen",
+    "title": "Fragen & Antworten",
+    "subtitle": "Alles Wichtige rund um Ihren Besuch bei uns — schnell erklärt.",
+    "q1Q": "Wie funktioniert die Online-Buchung?",
+    "q1A": "Wählen Sie einfach Ihre gewünschte Leistung, einen freien Termin und geben Sie Ihre Kontaktdaten ein. Die Buchung dauert unter 60 Sekunden. Sie erhalten sofort eine Bestätigung per E-Mail.",
+    "q2Q": "Kann ich meinen Termin kostenlos stornieren?",
+    "q2A": "Ja, Sie können Ihren Termin bis 24 Stunden vorher kostenlos stornieren. Bitte melden Sie sich telefonisch oder per E-Mail. Bei Nichterscheinen ohne Absage behalten wir uns vor, eine Ausfallgebühr zu erheben.",
+    "q3Q": "Wie lange im Voraus sollte ich buchen?",
+    "q3A": "Für einfache Schnitte empfehlen wir 2–3 Tage im Voraus. Für Colorationen, Balayage oder Brautstyling bitte mindestens 1–2 Wochen früher buchen, da diese Termine schnell vergeben sind.",
+    "q4Q": "Sind Waschen und Föhnen im Preis enthalten?",
+    "q4A": "Bei Damenschnitten sind Waschen und Föhnen in den angezeigten Preisen bereits enthalten. Herrenschnitte werden im Trockenen geschnitten, Waschen ist optional. Die genauen Konditionen entnehmen Sie unserer Preisliste.",
+    "q5Q": "Welche Zahlungsarten akzeptieren Sie?",
+    "q5A": "Wir akzeptieren Bargeld sowie EC-/Debitkarte (Girocard). Kreditkarten (Visa, Mastercard) sind ebenfalls willkommen. Gutscheine können direkt im Salon eingelöst werden.",
+    "q6Q": "Nehmen Sie auch Kinder, und ab welchem Alter?",
+    "q6A": "Wir schneiden Kinder ab 3 Jahren. Unsere Stylistinnen haben viel Erfahrung mit den Kleinsten und nehmen sich extra Zeit. Für Kinder bis 6 Jahre haben wir besondere Preise — einfach bei der Buchung ‚Kinderschnitt' wählen."
+  },
+  "hireCta": {
+    "badge": "Demo-Projekt · Von einem Entwickler erstellt",
+    "headline": "Gefällt Ihnen diese Demo?",
+    "subline": "Ich erstelle Ihnen eine maßgeschneiderte Website für Ihren Salon — fertig in 7 Tagen, DSGVO-konform, mit echter Online-Terminbuchung.",
+    "feature1": "Online-Terminbuchung",
+    "feature2": "KI-Empfangs-Chat",
+    "feature3": "DSGVO-konform",
+    "ctaPrimary": "Kostenloses Erstgespräch",
+    "ctaSecondary": "Portfolio ansehen",
+    "finePrint": "ab €600 · fertig in 1 Woche · erstellt von"
   }
 }
