@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Scissors, MapPin, Phone, Mail, Cookie } from 'lucide-react';
+import { Scissors, MapPin, Phone, Mail, Cookie, Github } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { salonConfig, navItems } from '@lib/config';
 import { openCookieSettings } from '@components/features/consent/ConsentProvider';
@@ -134,15 +134,26 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/35">
           <span>{tf('copyright')}</span>
-          <span>
-            {tf('madeBy')}{' '}
+          <span className="flex items-center gap-3">
+            <span>
+              {tf('madeBy')}{' '}
+              <a
+                href={salonConfig.demo.authorUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--color-blue-light)] hover:text-white transition-colors"
+              >
+                {tf('madeByLink')}
+              </a>
+            </span>
             <a
-              href={salonConfig.demo.authorUrl}
+              href="https://github.com/VladKobiakov/haarmonie-salon"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-blue-light)] hover:text-white transition-colors"
+              aria-label="Source code on GitHub"
+              className="text-white/35 hover:text-white/70 transition-colors"
             >
-              {tf('madeByLink')}
+              <Github size={14} />
             </a>
           </span>
         </div>

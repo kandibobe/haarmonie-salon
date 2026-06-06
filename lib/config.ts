@@ -67,7 +67,7 @@ export const salonConfig = {
 
   // — SEO —
   // Fallback-URL für metadataBase / JSON-LD, falls NEXT_PUBLIC_APP_URL fehlt.
-  defaultUrl: 'https://friseur-demo.vercel.app',
+  defaultUrl: 'https://haarmonie-salon.vercel.app',
   seo: {
     description:
       'Friseur- & Beauty-Salon in Gelsenkirchen mit Online-Terminbuchung: Damen- & Herrenschnitt, Coloration, Strähnen, Hochsteckfrisuren.',

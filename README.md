@@ -1,5 +1,8 @@
 # Haarmonie — Friseur-Demo mit Online-Terminbuchung
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-haarmonie--salon.vercel.app-blue)](https://haarmonie-salon.vercel.app)
+[![View Code](https://img.shields.io/badge/GitHub-VladKobiakov%2Fhaarmonie--salon-181717?logo=github)](https://github.com/VladKobiakov/haarmonie-salon)
+
 Demo-Website eines fiktiven Friseur- & Beauty-Salons in Gelsenkirchen. Portfolio-Projekt von
 [kobiakov.dev](https://kobiakov.dev). Alle Angaben (Firma, Preise, Kontaktdaten, Bewertungen) sind
 **fiktiv**.
@@ -47,14 +50,14 @@ Die Demo läuft **ohne jegliche Umgebungsvariablen** im Mock-Modus:
 
 Siehe [.env.example](.env.example). Kopiere sie nach `.env.local` und fülle aus, was du brauchst:
 
-| Variable                            | Zweck                                 | Ohne sie                          |
-| ----------------------------------- | ------------------------------------- | --------------------------------- |
-| `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Echte Blockierung belegter Slots      | Slots immer frei                  |
-| `RESEND_API_KEY`                    | Buchungsbestätigung per E-Mail        | E-Mail nur als Log                |
-| `SALON_EMAIL`                       | Empfänger der Buchungsmail            | Standard: `salonConfig.email`     |
-| `BOOKING_EMAIL_FROM`                | Absender (verifizierte Resend-Domain) | `onboarding@resend.dev`           |
-| `GOOGLE_GENERATIVE_AI_API_KEY`      | KI-Empfang via Gemini                 | Fallback-Antwort                  |
-| `NEXT_PUBLIC_APP_URL`               | Metadaten / Sitemap                   | `https://friseur-demo.vercel.app` |
+| Variable                            | Zweck                                 | Ohne sie                             |
+| ----------------------------------- | ------------------------------------- | ------------------------------------ |
+| `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Echte Blockierung belegter Slots      | Slots immer frei                     |
+| `RESEND_API_KEY`                    | Buchungsbestätigung per E-Mail        | E-Mail nur als Log                   |
+| `SALON_EMAIL`                       | Empfänger der Buchungsmail            | Standard: `salonConfig.email`        |
+| `BOOKING_EMAIL_FROM`                | Absender (verifizierte Resend-Domain) | `onboarding@resend.dev`              |
+| `GOOGLE_GENERATIVE_AI_API_KEY`      | KI-Empfang via Gemini                 | Fallback-Antwort                     |
+| `NEXT_PUBLIC_APP_URL`               | Metadaten / Sitemap                   | `https://haarmonie-salon.vercel.app` |
 
 ## Skripte
 
