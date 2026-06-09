@@ -127,7 +127,9 @@
     "waMessage": "Hallo {salon}, ich möchte meinen Termin bestätigen: {service} am {date} um {time} Uhr. Mein Name: {name}.",
     "stylistLabel": "Wunsch-Stylist (optional)",
     "stylistAny": "Egal / nächste*r frei",
-    "summaryStylist": "Stylist"
+    "summaryStylist": "Stylist",
+    "addToCalendar": "Zum Kalender hinzufügen",
+    "followInstagram": "Folgen Sie uns auf Instagram"
   },
   "contact": {
     "badge": "Kontakt",

@@ -33,7 +33,7 @@ const jsonLd = {
   telephone: salonConfig.phone,
   email: salonConfig.email,
   url: process.env.NEXT_PUBLIC_APP_URL || salonConfig.defaultUrl,
-  openingHours: ['Tu-Fr 09:00-19:00', 'Sa 09:00-15:00'],
+  openingHours: salonConfig.openingHoursSchemaOrg,
   priceRange: '€€',
   areaServed: { '@type': 'City', name: salonConfig.structuredAddress.locality },
   hasMap: salonConfig.googleMapsEmbedUrl,

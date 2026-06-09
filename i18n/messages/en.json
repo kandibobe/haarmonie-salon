@@ -127,7 +127,9 @@
     "waMessage": "Hi {salon}, I'd like to confirm my appointment: {service} on {date} at {time}. My name: {name}.",
     "stylistLabel": "Preferred stylist (optional)",
     "stylistAny": "No preference / next available",
-    "summaryStylist": "Stylist"
+    "summaryStylist": "Stylist",
+    "addToCalendar": "Add to calendar",
+    "followInstagram": "Follow us on Instagram"
   },
   "contact": {
     "badge": "Contact",

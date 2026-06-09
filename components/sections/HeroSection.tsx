@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ChevronDown, CalendarCheck, Sparkles, Award, Star } from 'lucide-react';
+import { ChevronDown, CalendarCheck, Sparkles, Award, Star, Tag } from 'lucide-react';
 import { salonConfig } from '@lib/config';
 
 export function HeroSection() {
@@ -112,6 +112,9 @@ export function HeroSection() {
             { icon: CalendarCheck, label: t('badge1') },
             { icon: Award, label: t('badge2') },
             { icon: Sparkles, label: t('badge3') },
+            ...(salonConfig.promo?.enabled
+              ? [{ icon: Tag, label: salonConfig.promo.badge }]
+              : []),
           ].map(({ icon: Icon, label }) => (
             <div
               key={label}

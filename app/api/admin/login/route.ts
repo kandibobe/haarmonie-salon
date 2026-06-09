@@ -1,18 +1,26 @@
 import { NextResponse } from 'next/server';
 import { checkRateLimit, getClientIp } from '@lib/rate-limit';
+import { makeSessionToken } from '@lib/admin-auth';
 
-// Einfaches Demo-Passwort-Gate (kein NextAuth nötig für eine Demo).
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'haarmonie-demo';
 const COOKIE = 'admin_auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
-  // CSRF: only same-origin requests allowed
+  // CSRF: exact hostname match (prevents evil.com.haarmonie.com bypass)
   const origin = request.headers.get('origin');
   const host = request.headers.get('host');
-  if (origin && host && !origin.includes(host)) {
-    return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+  if (origin && host) {
+    try {
+      const originHost = new URL(origin).hostname;
+      const expectedHost = host.split(':')[0];
+      if (originHost !== expectedHost) {
+        return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+      }
+    } catch {
+      return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+    }
   }
 
   // Rate limit: 3 attempts per 15 minutes per IP
@@ -26,13 +34,15 @@ export async function POST(request: Request) {
   if (password !== ADMIN_PASSWORD) {
     return NextResponse.json({ error: 'invalid' }, { status: 401 });
   }
+
+  // Store HMAC-signed token instead of raw password
   const res = NextResponse.json({ ok: true });
-  res.cookies.set(COOKIE, ADMIN_PASSWORD, {
+  res.cookies.set(COOKIE, makeSessionToken(ADMIN_PASSWORD), {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
     path: '/',
-    maxAge: 60 * 60 * 8, // 8 Stunden
+    maxAge: 60 * 60 * 8,
   });
   return res;
 }

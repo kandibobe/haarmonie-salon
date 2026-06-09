@@ -80,6 +80,22 @@ export const salonConfig = {
   // — Gutscheine —
   giftVoucherAmounts: [25, 50, 75, 100] as const,
 
+  // — SEO: maschinenlesbare Öffnungszeiten für JSON-LD Schema.org —
+  // Format: ["Mo-Fr 09:00-18:00", "Sa 09:00-15:00"]
+  openingHoursSchemaOrg: ['Tu-Fr 09:00-19:00', 'Sa 09:00-15:00'] as const,
+
+  // — Google Review URL (für Review-Request-E-Mail nach Termin) —
+  // Echtes Projekt: aus Google Maps "Bewertung schreiben"-Link einfügen.
+  googleReviewUrl: '',
+
+  // — Erstbesuch-Promo (optional) —
+  // enabled: false → kein Badge in der Hero-Section, kein Callout beim Buchungserfolg.
+  promo: {
+    enabled: true,
+    badge: 'Erstbesuch-Rabatt',
+    detailText: '10% Rabatt bei Ihrem ersten Besuch — einfach erwähnen!',
+  },
+
   // — Demo-Modus —
   // Für ein echtes Kundenprojekt: enabled = false → Demo-Banner & Disclaimer
   // verschwinden, "fiktiv"-Hinweise im Footer entfallen.
@@ -363,3 +379,28 @@ export const projects = [
     span: 'col-span-2',
   },
 ] as const;
+
+/**
+ * Baut den System-Prompt für den KI-Empfang dynamisch aus salonConfig.
+ * Wird in app/api/chat/route.ts importiert — kein Hardcode mehr nötig.
+ * Für einen neuen Kunden: nur config.ts anpassen, Prompt passt sich automatisch an.
+ */
+export function buildChatSystemPrompt(): string {
+  const serviceLines = services
+    .map((s) => `- ${s.id} (${s.price}, ca. ${s.duration} Min.)`)
+    .join('\n');
+
+  return `Du bist der freundliche KI-Empfang von "${salonConfig.name}", einem Friseur- und Beauty-Salon in ${salonConfig.city}.
+Antworte kurz, herzlich und auf Deutsch (oder in der Sprache des Kunden).
+
+Fakten über den Salon:
+- Adresse: ${salonConfig.addressDisplay}${salonConfig.demo.enabled ? ' (fiktiv, Demo)' : ''}
+- Öffnungszeiten: ${salonConfig.openingHours.weekdays}; ${salonConfig.openingHours.saturday}; ${salonConfig.openingHours.closed}
+- Telefon: ${salonConfig.phone}
+- Leistungen und Richtpreise:
+${serviceLines}
+
+Wichtig:
+- Wenn jemand einen Termin möchte, weise freundlich auf die Online-Terminbuchung auf dieser Seite hin ("Klicken Sie auf 'Termin buchen'").
+- Du kannst KEINE Termine direkt buchen — leite immer zur Buchungsfunktion weiter.${salonConfig.demo.enabled ? '\n- Dies ist eine Demo-Website; alle Angaben sind fiktiv. Erwähne das nur, wenn ausdrücklich danach gefragt wird.' : ''}`;
+}

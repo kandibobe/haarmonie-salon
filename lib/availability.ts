@@ -111,8 +111,14 @@ export interface BookingDetails {
   time: string;
 }
 
+export type BookingStatus = 'pending' | 'completed' | 'cancelled' | 'no_show';
+
 export interface StoredBooking extends BookingDetails {
   createdAt?: string;
+  status?: BookingStatus;
+  cancelToken?: string;
+  reminderSentAt?: string;
+  reviewRequestSentAt?: string;
 }
 
 /**
@@ -154,7 +160,7 @@ export async function getAllBookings(): Promise<StoredBooking[]> {
  * fügt hinzu. Gibt false zurück, wenn der Slot bereits vergeben ist.
  * Ohne Redis immer true (keine Persistenz).
  */
-export async function reserveSlot(details: BookingDetails): Promise<boolean> {
+export async function reserveSlot(details: BookingDetails, cancelToken?: string): Promise<boolean> {
   if (!redis) return true;
 
   const key = bookingKey(details.date);
@@ -165,13 +171,63 @@ export async function reserveSlot(details: BookingDetails): Promise<boolean> {
     await redis.sadd(key, details.time);
     await redis.expire(key, BOOKING_TTL_SECONDS);
 
+    const stored: StoredBooking = {
+      ...details,
+      createdAt: new Date().toISOString(),
+      status: 'pending',
+      ...(cancelToken ? { cancelToken } : {}),
+    };
     const id = `booking:${details.date}:${details.time}`;
-    await redis.set(id, JSON.stringify({ ...details, createdAt: new Date().toISOString() }), {
-      ex: BOOKING_TTL_SECONDS,
-    });
+    await redis.set(id, JSON.stringify(stored), { ex: BOOKING_TTL_SECONDS });
     return true;
   } catch {
-    // Bei Redis-Fehler die Buchung nicht blockieren (Demo-Verhalten).
     return true;
+  }
+}
+
+/**
+ * Liest eine einzelne Buchung anhand ihres Redis-Schlüssels.
+ */
+export async function getBookingById(id: string): Promise<StoredBooking | null> {
+  if (!redis) return null;
+  try {
+    const v = await redis.get(id);
+    if (!v) return null;
+    return typeof v === 'string' ? (JSON.parse(v) as StoredBooking) : (v as StoredBooking);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Schreibt eine Buchung zurück (für Status-Updates durch Admin).
+ */
+export async function updateBooking(id: string, patch: Partial<StoredBooking>): Promise<boolean> {
+  if (!redis) return false;
+  try {
+    const current = await getBookingById(id);
+    if (!current) return false;
+    const updated: StoredBooking = { ...current, ...patch };
+    await redis.set(id, JSON.stringify(updated), { keepTtl: true });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Storniert einen Slot: setzt status=cancelled und gibt den Slot wieder frei.
+ */
+export async function cancelSlot(id: string): Promise<boolean> {
+  if (!redis) return false;
+  try {
+    const booking = await getBookingById(id);
+    if (!booking || booking.status === 'cancelled') return false;
+    // Slot aus booked-set entfernen → wieder buchbar
+    await redis.srem(bookingKey(booking.date), booking.time);
+    await updateBooking(id, { status: 'cancelled' });
+    return true;
+  } catch {
+    return false;
   }
 }

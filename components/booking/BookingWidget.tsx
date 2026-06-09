@@ -20,9 +20,13 @@ import {
   Loader2,
   ChevronLeft,
   ArrowRight,
+  Calendar,
+  Instagram,
+  Tag,
 } from 'lucide-react';
 import { cn } from '@lib/utils';
 import { salonConfig, services, team, type Service } from '@lib/config';
+import { WaitlistCapture } from './WaitlistCapture';
 
 const iconMap = { Scissors, User, Palette, Sparkles, Crown, Baby } as const;
 
@@ -176,6 +180,8 @@ export function BookingWidget() {
         })
       )}`
     : '#';
+
+  const icsHref = confirmed ? buildIcsHref(confirmed) : null;
 
   const inputClass = cn(
     'w-full bg-white border border-[var(--color-border)] rounded-xl px-4 py-3',
@@ -339,11 +345,13 @@ export function BookingWidget() {
                   <CalendarDays size={15} /> {t('pickDate')}
                 </p>
               ) : slotsLoading ? (
-                <div className="flex items-center justify-center py-8 text-[var(--color-muted)]">
-                  <Loader2 size={20} className="animate-spin" />
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <div key={i} className="h-10 rounded-lg bg-[var(--color-border)] animate-pulse" />
+                  ))}
                 </div>
               ) : slots.length === 0 ? (
-                <p className="text-sm text-[var(--color-muted)] py-4">{t('noSlots')}</p>
+                <WaitlistCapture date={date} serviceId={service?.id} />
               ) : (
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {slots.map((s) => {
@@ -541,6 +549,13 @@ export function BookingWidget() {
               <CheckCircle2 size={56} className="text-[var(--color-blue)] mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-[var(--color-text)] mb-2">{t('successTitle')}</h3>
               <p className="text-sm text-[var(--color-muted)] mb-5">{t('successSubtitle')}</p>
+              {salonConfig.promo?.enabled && (
+                <div className="mb-5 px-4 py-3 rounded-xl bg-[var(--color-yellow)]/10 border border-[var(--color-yellow)]/30 text-sm text-center max-w-sm mx-auto">
+                  <Tag size={13} className="inline-block mr-1 text-[var(--color-yellow-dark)]" />
+                  <strong className="text-[var(--color-yellow-dark)]">{salonConfig.promo.badge}:</strong>{' '}
+                  <span className="text-[var(--color-text)]">{salonConfig.promo.detailText}</span>
+                </div>
+              )}
 
               <div className="bg-[var(--color-bg-alt)] rounded-2xl px-5 py-4 text-left max-w-sm mx-auto mb-6 space-y-1.5">
                 <div className="flex justify-between text-sm">
@@ -576,6 +591,15 @@ export function BookingWidget() {
                 >
                   <WhatsAppIcon /> {t('confirmWhatsApp')}
                 </a>
+                {icsHref && (
+                  <a
+                    href={icsHref}
+                    download={`termin-${confirmed?.date}.ics`}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] font-semibold text-sm transition-colors"
+                  >
+                    <Calendar size={15} /> {t('addToCalendar')}
+                  </a>
+                )}
                 <button
                   type="button"
                   onClick={resetAll}
@@ -584,12 +608,52 @@ export function BookingWidget() {
                   {t('newBooking')}
                 </button>
               </div>
+              {salonConfig.social.instagram && (
+                <div className="mt-5">
+                  <a
+                    href={salonConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-[var(--color-muted)] hover:text-[var(--color-blue-glow)] transition-colors"
+                  >
+                    <Instagram size={14} /> {t('followInstagram')}
+                  </a>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     </div>
   );
+}
+
+function buildIcsHref(confirmed: Confirmed): string {
+  const [y, m, d] = confirmed.date.split('-');
+  const [hh, mm] = confirmed.time.split(':');
+  const pad = (n: string) => n.padStart(2, '0');
+  const start = `${y}${pad(m)}${pad(d)}T${pad(hh)}${pad(mm)}00`;
+  // Add ~60 min for the end time
+  const endMin = parseInt(hh) * 60 + parseInt(mm) + 60;
+  const endHH = Math.floor(endMin / 60).toString();
+  const endMM = (endMin % 60).toString();
+  const end = `${y}${pad(m)}${pad(d)}T${pad(endHH)}${pad(endMM)}00`;
+
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Haarmonie//Termin//DE',
+    'BEGIN:VEVENT',
+    `DTSTART:${start}`,
+    `DTEND:${end}`,
+    `SUMMARY:${confirmed.service} bei ${salonConfig.name}`,
+    `LOCATION:${salonConfig.addressDisplay}`,
+    `DESCRIPTION:Ihr Termin bei ${salonConfig.name}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+
+  return `data:text/calendar;charset=utf8,${encodeURIComponent(ics)}`;
 }
 
 function WhatsAppIcon() {
