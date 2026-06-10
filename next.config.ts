@@ -27,6 +27,9 @@ const securityHeaders = [
       "frame-src https://www.google.com https://maps.google.com",
       "connect-src 'self' https://*.upstash.io https://generativelanguage.googleapis.com",
       "form-action 'self'",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "object-src 'none'",
     ].join('; '),
   },
 ];
